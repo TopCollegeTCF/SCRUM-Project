@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#052e16"/>
+      <stop offset="50%" stop-color="#166534"/>
+      <stop offset="100%" stop-color="#65a30d"/>
+    </linearGradient>
+    <linearGradient id="accent3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#bef264"/>
+      <stop offset="100%" stop-color="#d9f99d"/>
+    </linearGradient>
+    <pattern id="grid3" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="300" fill="url(#bg3)"/>
+  <rect width="1200" height="300" fill="url(#grid3)"/>
+
+  <circle cx="1050" cy="60" r="120" fill="#bef264" opacity="0.12"/>
+  <circle cx="150" cy="260" r="140" fill="#65a30d" opacity="0.10"/>
+  <circle cx="600" cy="150" r="220" fill="#22c55e" opacity="0.07"/>
+
+  <text x="60" y="120" font-family="Segoe UI, Arial, sans-serif" font-size="46" font-weight="700" fill="#ffffff">
+    Команда и продукт
+  </text>
+  <text x="60" y="165" font-family="Segoe UI, Arial, sans-serif" font-size="22" fill="#d9f99d">
+    Спринт 1 — Урок 3 · Групповой проект
+  </text>
+
+  <rect x="60" y="195" width="260" height="44" rx="22" fill="url(#accent3)"/>
+  <text x="190" y="223" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700" fill="#052e16">
+    GitHub · Project · README.md
+  </text>
+
+  <text x="60" y="275" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#a3e635">
+    Соберите команду · цель продукта · репозиторий · состав в README
+  </text>
+
+  <g transform="translate(980,150)" opacity="0.9">
+    <ellipse cx="0" cy="0" rx="70" ry="24" fill="none" stroke="#bef264" stroke-width="3"/>
+    <ellipse cx="0" cy="-36" rx="70" ry="24" fill="none" stroke="#a3e635" stroke-width="3"/>
+    <ellipse cx="0" cy="36" rx="70" ry="24" fill="none" stroke="#84cc16" stroke-width="3"/>
+    <line x1="-70" y1="0" x2="-70" y2="-36" stroke="#bef264" stroke-width="3"/>
+    <line x1="70" y1="0" x2="70" y2="-36" stroke="#a3e635" stroke-width="3"/>
+    <line x1="-70" y1="0" x2="-70" y2="36" stroke="#84cc16" stroke-width="3"/>
+    <line x1="70" y1="0" x2="70" y2="36" stroke="#84cc16" stroke-width="3"/>
+  </g>
+</svg>
