@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agile без догм — идеи Ивана Белокаменцева</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { height:100%; overflow:hidden; }
+  body {
+    font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+    background:#0b0e1a; color:#eef1f8;
+    -webkit-font-smoothing:antialiased;
+  }
+  .deck { position:relative; width:100%; height:100vh; overflow:hidden; }
+  .track { display:flex; height:100%; transition:transform .65s cubic-bezier(.65,.05,.36,1); }
+  .slide {
+    flex:0 0 100vw; height:100vh; overflow:hidden;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:6vh 10vw; position:relative;
+  }
+  .slide::before {
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background:
+      radial-gradient(60vw 60vh at 85% -10%, rgba(124,92,255,.20), transparent 60%),
+      radial-gradient(50vw 50vh at 5% 110%, rgba(0,208,255,.14), transparent 60%);
+  }
+  .kicker {
+    font-size:clamp(11px,1.2vw,14px); letter-spacing:.35em; text-transform:uppercase;
+    color:#8f9bb3; margin-bottom:2.2vh; position:relative;
+  }
+  .kicker b { color:#7ce7ff; font-weight:600; letter-spacing:.35em; }
+  h1 {
+    font-size:clamp(34px,6.2vw,84px); line-height:1.04; font-weight:800;
+    background:linear-gradient(100deg,#fff 30%,#9db6ff 70%,#7ce7ff);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    position:relative;
+  }
+  h2 {
+    font-size:clamp(26px,4.2vw,56px); line-height:1.1; font-weight:800; position:relative;
+  }
+  h2 .hl { color:#7ce7ff; }
+  h2 .hl2 { color:#c9a6ff; }
+  .lead {
+    font-size:clamp(16px,1.9vw,24px); line-height:1.55; color:#c3cbe2;
+    max-width:46em; margin-top:3vh; position:relative;
+  }
+  .lead b, .lead strong { color:#fff; }
+  .quote {
+    position:relative; margin-top:4vh; padding:2.4vh 2.2vw;
+    border-left:3px solid #7ce7ff; background:rgba(124,231,255,.06);
+    border-radius:0 14px 14px 0; font-size:clamp(15px,1.8vw,22px);
+    line-height:1.5; color:#dfe6f7; max-width:52em; font-style:italic;
+  }
+  .quote small { display:block; margin-top:1.2vh; font-style:normal; color:#8f9bb3; font-size:.8em; letter-spacing:.06em; }
+  .cards {
+    display:grid; gap:1.6vh 1.2vw; margin-top:3.6vh; position:relative;
+    grid-template-columns:repeat(auto-fit,minmax(min(280px,42vw),1fr));
+  }
+  .card {
+    background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.09);
+    border-radius:18px; padding:2.4vh 1.6vw;
+    transition:transform .3s ease, border-color .3s ease;
+  }
+  .card:hover { transform:translateY(-4px); border-color:rgba(124,231,255,.45); }
+  .card .n {
+    font-size:clamp(11px,1.1vw,13px); letter-spacing:.2em; color:#7ce7ff;
+    text-transform:uppercase; margin-bottom:1vh; font-weight:700;
+  }
+  .card h3 { font-size:clamp(16px,1.7vw,22px); font-weight:700; margin-bottom:1vh; line-height:1.25; }
+  .card p { font-size:clamp(13px,1.45vw,17px); line-height:1.5; color:#b7c0d8; }
+  .steps { counter-reset:step; margin-top:3.4vh; position:relative; }
+  .step {
+    counter-increment:step; display:flex; gap:1.4vw; align-items:flex-start;
+    padding:1.8vh 0; border-bottom:1px solid rgba(255,255,255,.08); max-width:60em;
+  }
+  .step:last-child { border-bottom:none; }
+  .step::before {
+    content:counter(step,decimal-leading-zero);
+    font-size:clamp(15px,1.6vw,20px); font-weight:800; color:#7ce7ff;
+    font-variant-numeric:tabular-nums; padding-top:.2vh; min-width:2.6em;
+  }
+  .step div h3 { font-size:clamp(16px,1.8vw,23px); font-weight:700; margin-bottom:.6vh; }
+  .step div p { font-size:clamp(13px,1.5vw,18px); color:#b7c0d8; line-height:1.5; }
+  .step .act { color:#c9a6ff; }
+  .big-num {
+    font-size:clamp(70px,13vw,190px); font-weight:900; line-height:1; position:relative;
+    background:linear-gradient(120deg,#7ce7ff,#7c5cff);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .bignum-wrap { display:flex; gap:5vw; align-items:center; margin-top:2.5vh; position:relative; flex-wrap:wrap; }
+  .bignum-wrap .cap { font-size:clamp(14px,1.7vw,21px); color:#b7c0d8; max-width:26em; line-height:1.55; }
+  .bignum-wrap .cap b { color:#fff; }
+  .formula {
+    position:relative; margin-top:3.5vh; display:inline-flex; align-items:center; gap:1.6vw;
+    background:rgba(124,92,255,.10); border:1px solid rgba(201,166,255,.35);
+    border-radius:16px; padding:2.2vh 2.4vw; font-size:clamp(17px,2.2vw,30px); font-weight:700;
+  }
+  .formula .eq { color:#7ce7ff; }
+  .formula .res { color:#c9a6ff; }
+  .pill-row { display:flex; flex-wrap:wrap; gap:1vw; margin-top:3.2vh; position:relative; }
+  .pill {
+    border:1px solid rgba(124,231,255,.4); border-radius:999px; padding:1.1vh 1.6vw;
+    font-size:clamp(12px,1.35vw,16px); color:#dfe6f7; background:rgba(124,231,255,.06);
+  }
+  .pill.y { border-color:rgba(201,166,255,.5); background:rgba(201,166,255,.08); }
+  .vs { display:grid; grid-template-columns:1fr 1fr; gap:2vw; margin-top:3.4vh; position:relative; }
+  @media (max-width:760px){ .vs { grid-template-columns:1fr; } }
+  .vs .col { border-radius:18px; padding:2.6vh 1.8vw; border:1px solid rgba(255,255,255,.1); }
+  .vs .col.a { background:linear-gradient(160deg,rgba(124,231,255,.10),rgba(124,231,255,.02)); }
+  .vs .col.b { background:linear-gradient(160deg,rgba(201,166,255,.12),rgba(201,166,255,.02)); }
+  .vs h3 { font-size:clamp(17px,2vw,26px); margin-bottom:1.4vh; }
+  .vs ul { list-style:none; }
+  .vs li {
+    font-size:clamp(13px,1.45vw,17px); color:#c3cbe2; line-height:1.5;
+    padding:.9vh 0 .9vh 1.5em; position:relative;
+  }
+  .vs li::before { content:"—"; position:absolute; left:0; color:#7ce7ff; }
+  .vs .col.b li::before { color:#c9a6ff; }
+  .sources { list-style:none; margin-top:3vh; position:relative; max-width:56em; }
+  .sources li {
+    padding:1.5vh 0; border-bottom:1px solid rgba(255,255,255,.08);
+    font-size:clamp(13px,1.5vw,18px); color:#c3cbe2; line-height:1.5;
+  }
+  .sources li:last-child { border-bottom:none; }
+  .sources a { color:#7ce7ff; text-decoration:none; border-bottom:1px dotted rgba(124,231,255,.5); }
+  .sources a:hover { color:#fff; }
+  .foot-note { margin-top:4vh; color:#8f9bb3; font-size:clamp(12px,1.3vw,15px); position:relative; }
+  /* HUD */
+  .progress { position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg,#7c5cff,#7ce7ff); width:0; z-index:10; transition:width .5s ease; }
+  .hud {
+    position:fixed; bottom:0; left:0; right:0; z-index:10;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:2vh 3vw; pointer-events:none;
+  }
+  .brand { font-size:12px; letter-spacing:.28em; text-transform:uppercase; color:#6d7791; }
+  .dots { display:flex; gap:10px; pointer-events:auto; }
+  .dot { width:9px; height:9px; border-radius:50%; background:rgba(255,255,255,.18); border:none; cursor:pointer; padding:0; transition:.3s; }
+  .dot.on { background:#7ce7ff; transform:scale(1.3); box-shadow:0 0 12px rgba(124,231,255,.7); }
+  .counter { font-size:13px; color:#6d7791; font-variant-numeric:tabular-nums; }
+  .hint {
+    position:fixed; right:3vw; top:3vh; z-index:10; color:#5d6680;
+    font-size:11.5px; letter-spacing:.12em; text-align:right; line-height:1.8;
+  }
+  .hint kbd {
+    font-family:inherit; border:1px solid rgba(255,255,255,.16); border-radius:6px;
+    padding:1px 7px; color:#9aa4bf;
+  }
+  .nav-arrow {
+    position:fixed; top:50%; transform:translateY(-50%); z-index:10;
+    width:52px; height:52px; border-radius:50%; border:1px solid rgba(255,255,255,.14);
+    background:rgba(15,18,32,.55); color:#9aa4bf; font-size:20px; cursor:pointer;
+    backdrop-filter:blur(6px); transition:.25s;
+  }
+  .nav-arrow:hover { color:#7ce7ff; border-color:rgba(124,231,255,.5); }
+  .nav-arrow.prev { left:1.4vw; } .nav-arrow.next { right:1.4vw; }
+  /* Reveal animation */
+  .slide .anim { opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s ease; }
+  .slide.active .anim { opacity:1; transform:none; }
+  .slide.active .anim.d1 { transition-delay:.12s; }
+  .slide.active .anim.d2 { transition-delay:.26s; }
+  .slide.active .anim.d3 { transition-delay:.4s; }
+  .slide.active .anim.d4 { transition-delay:.54s; }
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="hint" id="hint">Используйте как <kbd>опыт</kbd> а не как правило</div>
+<div class="deck"><div class="track" id="track">
+
+<!-- 1 ТИТУЛ -->
+<section class="slide">
+  <div class="kicker anim">Нмиван / Книжный стек / Хабр</div>
+  <h1 class="anim d1">Agile без&nbsp;догм</h1>
+  <p class="lead anim d2">Главные идеи <b>Ивана Белокаменцева</b> (@nmivan) об управлении проектами, Scrum и Канбане — по подборке книг и статьям «Книжного стека».</p>
+  <div class="pill-row anim d3">
+    <span class="pill">Scrum</span><span class="pill y">Kanban</span><span class="pill">Agile</span><span class="pill y">Обратный закон Паркинсона</span><span class="pill">Самоорганизация</span>
+  </div>
+</section>
+
+<!-- 2 КАРТА -->
+<section class="slide">
+  <div class="kicker anim">Основа</div>
+  <h2 class="anim d1">Четыре книги — четыре <span class="hl">системы координат</span></h2>
+  <div class="cards">
+    <div class="card anim d1"><div class="n">Джефф Сазерленд</div><h3>«Scrum. Революционный метод управления проектами»</h3><p>Скрам — не догма из Scrum Guide, а путь непрерывного совершенствования. От Сю к Ха и Ри.</p></div>
+    <div class="card anim d2"><div class="n">О'Коннор, Макдермотт</div><h3>«Искусство системного мышления»</h3><p>Главное в системе — не элементы, а связи и эмерджентные свойства.</p></div>
+    <div class="card anim d3"><div class="n">Кен Уилбер</div><h3>«Интегральная духовность»</h3><p>Замени должности на роли — и люди перестанут бояться пробовать новое.</p></div>
+    <div class="card anim d4"><div class="n">Альфи Кон</div><h3>«Парадокс мотивации»</h3><p>Оклад купил время, сделка — купил результат. Время надо уметь управлять.</p></div>
+  </div>
+</section>
+
+<!-- 3 SCRUM НЕ ДОГМА -->
+<section class="slide">
+  <div class="kicker anim">Идея 01 · Scrum</div>
+  <h2 class="anim d1">Scrum — это <span class="hl">не догма</span>, а путь непрерывного совершенствования</h2>
+  <div class="quote anim d2">«Скрам — это не догма из scrum guide, а путь непрерывного совершенствования. От Сю к Ха и Ри.»<small>— комментарий автора к книге Сазерленда в карте Книжного стека</small></div>
+  <div class="steps">
+    <div class="step anim d3"><div><h3>Сю — следуй правилам</h3><p>Осваиваешь фреймворк как есть: спринты, ретроспективы, диаграмма сгорания задач.</p></div></div>
+    <div class="step anim d3"><div><h3>Ха — ломай и подстраивай</h3><p>Понял принципы — меняешь компоненты под свой проект и команду.</p></div></div>
+    <div class="step anim d4"><div><h3>Ри — понимаешь суть</h3><p>Действуешь по принципам, а не по методичке. Скрам-мастер и «священный канон» уже не нужны.</p></div></div>
+  </div>
+</section>
+
+<!-- 4 КОНСТРУКТОР -->
+<section class="slide">
+  <div class="kicker anim">Идея 02 · Методология</div>
+  <h2 class="anim d1">Методика — это <span class="hl">конструктор</span>, а не религия</h2>
+  <p class="lead anim d2">Скрам, как и любая методика, соткан из компонентов: спринт, бэклог, доска, роли, ретроспектива. Каждый компонент можно проверить на прочность вопросом <b>«а что будет, если это убрать?»</b> — и пересобрать всё под свой продукт.</p>
+  <div class="quote anim d3">«Кто-то просто возьмёт исходные компоненты и пересоберёт их по-своему — так, как надо в конкретном проекте.»<small>— «Как сбежать из секты?», Хабр</small></div>
+  <p class="foot-note anim d4">Сазерленд изначально собирал Scrum из чужого: теория ограничений Голдратта, производственная система Toyota (муда, мура, мури), принципы Деминга. Почему бы и вам не поступить так же?</p>
+</section>
+
+<!-- 5 ОБРАТНЫЙ ПАРКИНСОН -->
+<section class="slide">
+  <div class="kicker anim">Идея 03 · Планирование</div>
+  <h2 class="anim d1">Обратный <span class="hl2">закон Паркинсона</span></h2>
+  <p class="lead anim d2">Обычный Паркинсон: <b>работа занимает всё время, отпущенное на неё</b>. Мозг, как климат-контроль, подстраивает скорость под объём задач. Скрам читает закон наоборот — и включает его себе на пользу.</p>
+  <div class="bignum-wrap anim d3">
+    <div class="big-num">200</div>
+    <div class="cap">Запланируй на день 200 баллов при реальной скорости 100 — сделаешь <b>150–180</b>. Часть останется недоделанной, но прибавка значительная: подсознание само разгоняется под объём плана.</div>
+  </div>
+  <div class="formula anim d4"><span class="eq">Скрам:</span> сделать всё запланированное <span style="color:#5d6680">·</span> <span class="res">Бисмарк:</span> сделать максимум из возможного</div>
+</section>
+
+<!-- 6 СКОРОСТЬ И МЕТРИКИ -->
+<section class="slide">
+  <div class="kicker anim">Идея 04 · Метрики</div>
+  <h2 class="anim d1">Скорость измеряется в <span class="hl">баллах</span>, прогресс — диаграммой сгорания</h2>
+  <div class="steps">
+    <div class="step anim d2"><div><h3>Замерь «попугаев»</h3><p>Оценивай задачи в условных баллах. Неделя работы покажет, сколько их реально закрывается — это твоя базовая скорость.</p></div></div>
+    <div class="step anim d3"><div><h3>Планируй выше базовой</h3><p>100 баллов сделано? Планируй 110 — и так до 4-кратного ускорения. Скрам учит работать всё быстрее и быстрее.</p></div></div>
+    <div class="step anim d4"><div><h3>Анализируй причины</h3><p>Сделал 150 вместо 200 — садись и разбирай, что изменилось и почему получилось больше. Рефлексия после — часть алгоритма.</p></div></div>
+  </div>
+  <p class="foot-note anim d4">Здравомыслящая поправка: всегда расставляй приоритеты. Незавершённые дела в этом методе — норма, перфекционистам придётся смириться.</p>
+</section>
+
+<!-- 7 КАНБАН -->
+<section class="slide">
+  <div class="kicker anim">Идея 05 · Канбан</div>
+  <h2 class="anim d1">Канбан-метод и канбан-доска — <span class="hl">не одно и то же</span></h2>
+  <p class="lead anim d2">Канбан — это метод управления потоком работы. Доска — лишь его инструмент. «Скрам — это доска со стикерами» — типичная подмена понятий.</p>
+  <div class="pill-row anim d3">
+    <span class="pill">Визуализация потока</span>
+    <span class="pill y">WIP-лимиты — ограничение незавершённой работы</span>
+    <span class="pill">Cycle time — время выполнения одного элемента</span>
+    <span class="pill y">Continuous flow — поток вместо спринтов</span>
+  </div>
+  <p class="foot-note anim d4">Лимит задаётся не спринтом, а размером очереди каждого столбца. Чем больше задач «в работе», тем меньше эффективность — WIP-лимит дисциплинирует и доводит дела до конца.</p>
+</section>
+
+<!-- 8 ИНСТРУМЕНТЫ -->
+<section class="slide">
+  <div class="kicker anim">Идея 06 · Инструменты</div>
+  <h2 class="anim d1">Доска — <span class="hl">просто инструмент</span>. Проверяй каждый на прочность</h2>
+  <div class="vs">
+    <div class="col a anim d2">
+      <h3>Бумажная доска</h3>
+      <ul>
+        <li>Всё видно одним взглядом, ничего не листается</li>
+        <li>Живая церемония: переставил стикер — перенёс задачу</li>
+        <li>Авторская доска была из четырёх листов А4 — «позорно колхозная», и работала</li>
+      </ul>
+    </div>
+    <div class="col b anim d3">
+      <h3>Электронная доска</h3>
+      <ul>
+        <li>Потеряла главное преимущество бумаги — цельный вид</li>
+        <li>«Верный признак сектанства», по мнению автора</li>
+        <li>Спасает, только если команда территориально распределена</li>
+      </ul>
+    </div>
+  </div>
+  <p class="foot-note anim d4">Работает ли скрам без доски? Легко. Жена лепит стикеры на холодильник и ничего не знает про скрам — инструмент кроссплатформенный.</p>
+</section>
+
+<!-- 9 КЕЙС -->
+<section class="slide">
+  <div class="kicker anim">Идея 07 · Практика</div>
+  <h2 class="anim d1">Кейс: отдел автоматизации <span class="hl">ускорился в 4 раза</span></h2>
+  <div class="bignum-wrap anim d2">
+    <div class="big-num">×4</div>
+    <div class="cap">Внедрение Scrum в ИТ-отделе предприятия: работа по автоматизации ускорилась примерно <b>в четыре раза</b>. Результат затем использовали для повышения зарплат программистам.</div>
+  </div>
+  <div class="quote anim d3">«Если книгу читает директор, не айтишник, он в первую очередь видит мысль об ускорении. А айтишники видят стикеры.»<small>— «Как Scrum карьере моей помог», Хабр</small></div>
+  <div class="pill-row anim d4">
+    <span class="pill">Спринты</span><span class="pill y">Доска со стикерами — ключевой артефакт</span><span class="pill">Диаграмма сгорания задач</span><span class="pill y">Контракт на 4-кратную скорость</span>
+  </div>
+</section>
+
+<!-- 10 ЛЮДИ -->
+<section class="slide">
+  <div class="kicker anim">Идея 08 · Люди</div>
+  <h2 class="anim d1">При правильной системе управления людям <span class="hl">не нужен руководитель</span></h2>
+  <div class="cards">
+    <div class="card anim d2"><div class="n">Кен Уилбер</div><h3>Роли вместо должностей</h3><p>Замени должности на роли — и люди перестанут бояться пробовать новое.</p></div>
+    <div class="card anim d3"><div class="n">Ким Скотт</div><h3>Радикальная прямота</h3><p>Давай отрицательную обратную связь, не жди увольнения. Не даёт обратной связи — выпытывай её сам.</p></div>
+    <div class="card anim d3"><div class="n">Альфи Кон</div><h3>Мотивация</h3><p>Оклад — купил время, сделка — купил результат. Плати за решённую задачу, а не за часы присутствия.</p></div>
+    <div class="card anim d4"><div class="n">Уилбер · Скотт</div><h3>Плато — не клеймо</h3><p>Дай сотруднику полежать на плато развития — и он вернётся. Среда и настойчивость переучат сами.</p></div>
+  </div>
+</section>
+
+<!-- 11 ИТОГ -->
+<section class="slide">
+  <div class="kicker anim">Итог · Манифест автора</div>
+  <h2 class="anim d1">Формула <span class="hl">Agile без догм</span></h2>
+  <div class="steps">
+    <div class="step anim d2"><div><h3>Бери принципы, не методичку</h3><p>Спринт, бэклог, доска, мастер — компоненты. Пересобирай под проект и понимай, почему это работает.</p></div></div>
+    <div class="step anim d3"><div><h3>Планируй смело, делай максимум</h3><p>Обратный закон Паркинсона: план 200 баллов при скорости 100. Гонка с подсознанием — в свою пользу.</p></div></div>
+    <div class="step anim d3"><div><h3>Считай баллы и рефлексируй</h3><p>Скорость, диаграмма сгорания, разбор причин после каждой итерации — двигатель непрерывного ускорения.</p></div></div>
+    <div class="step anim d4"><div><h3>Ставь на людей и среду</h3><p>Роли вместо должностей, честная обратная связь, мотивация за результат. Система управляет — человек творит.</p></div></div>
+  </div>
+</section>
+
+<!-- 12 ИСТОЧНИКИ -->
+<section class="slide">
+  <div class="kicker anim">Источники</div>
+  <h2 class="anim d1">Где это всё написано</h2>
+  <ul class="sources">
+    <li>Карта Книжного стека — <a href="https://habr.com/ru/articles/1103676/">habr.com/ru/articles/1103676/</a></li>
+    <li>Бисмарк, Scrum и Паркинсон: повышаем эффективность — <a href="https://habr.com/ru/articles/1105106/">habr.com/ru/articles/1105106/</a></li>
+    <li>Как Scrum карьере моей помог — <a href="https://habr.com/ru/articles/1108050/">habr.com/ru/articles/1108050/</a></li>
+    <li>Как сбежать из секты? — <a href="https://habr.com/ru/articles/451562/">habr.com/ru/articles/451562/</a></li>
+    <li>В погоне за лучшим — <a href="https://habr.com/ru/articles/434254/">habr.com/ru/articles/434254/</a></li>
+  </ul>
+  <p class="foot-note anim d2">Все материалы — Иван Белокаменцев (@nmivan), блог «Книжный стек» на Хабре. Презентация составлена по идеям автора, формулировки частично сжаты.</p>
+</section>
+
+</div></div>
+
+<button class="nav-arrow prev" id="prev" aria-label="Назад">‹</button>
+<button class="nav-arrow next" id="next" aria-label="Вперёд">›</button>
+<div class="hud">
+  <div class="brand">Книжный стек · Agile без догм</div>
+  <div class="dots" id="dots"></div>
+  <div class="counter" id="counter">01 / 12</div>
+</div>
+
+<script>
+(function(){
+  var track=document.getElementById('track');
+  var slides=track.children;
+  var n=slides.length, cur=0;
+  var dotsBox=document.getElementById('dots');
+  var counter=document.getElementById('counter');
+  var progress=document.getElementById('progress');
+  for(var i=0;i<n;i++){
+    var b=document.createElement('button');
+    b.className='dot'; b.setAttribute('aria-label','Слайд '+(i+1));
+    b.dataset.i=i; dotsBox.appendChild(b);
+  }
+  function go(i){
+    cur=Math.max(0,Math.min(n-1,i));
+    track.style.transform='translateX(-'+(cur*100)+'vw)';
+    Array.prototype.forEach.call(dotsBox.children,function(d,k){d.classList.toggle('on',k===cur);});
+    counter.textContent=(cur+1<10?'0':'')+(cur+1)+' / '+n;
+    progress.style.width=((cur+1)/n*100)+'%';
+    Array.prototype.forEach.call(slides,function(s,k){s.classList.toggle('active',k===cur);});
+    document.getElementById('prev').style.visibility=cur===0?'hidden':'visible';
+    document.getElementById('next').style.visibility=cur===n-1?'hidden':'visible';
+  }
+  document.getElementById('next').onclick=function(){go(cur+1);};
+  document.getElementById('prev').onclick=function(){go(cur-1);};
+  dotsBox.onclick=function(e){ if(e.target.dataset.i!==undefined) go(+e.target.dataset.i); };
+  document.addEventListener('keydown',function(e){
+    if(['ArrowRight','PageDown','Enter',' '].indexOf(e.key)>-1){ e.preventDefault(); go(cur+1); }
+    else if(['ArrowLeft','PageUp'].indexOf(e.key)>-1){ e.preventDefault(); go(cur-1); }
+    else if(e.key==='Home'){ go(0); } else if(e.key==='End'){ go(n-1); }
+  });
+  var touchX=null;
+  document.addEventListener('touchstart',function(e){touchX=e.touches[0].clientX;},{passive:true});
+  document.addEventListener('touchend',function(e){
+    if(touchX===null) return;
+    var dx=e.changedTouches[0].clientX-touchX; touchX=null;
+    if(Math.abs(dx)>50) go(cur+(dx<0?1:-1));
+  },{passive:true});
+  var wheelLock=false;
+  document.addEventListener('wheel',function(e){
+    if(Math.abs(e.deltaY)<18||wheelLock) return;
+    wheelLock=true; setTimeout(function(){wheelLock=false;},700);
+    go(cur+(e.deltaY>0?1:-1));
+  },{passive:true});
+  go(0);
+})();
+</script>
+</body>
+</html>
