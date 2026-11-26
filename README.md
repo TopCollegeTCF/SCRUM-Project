@@ -1,3 +1,5 @@
+WK 2.0: https://github.com/yarasoftes/project4k.git
+
 ScrupDrop: https://github.com/TopCollegeTCF/ScrumDrop
 
 FamilyCaze: https://github.com/Gor0o0/FamilyCaze
