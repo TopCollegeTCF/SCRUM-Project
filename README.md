@@ -1,6 +1,7 @@
 FamilyCaze: https://github.com/Gor0o0/FamilyCaze
+Grande Course: https://github.com/Tigrib35/The_Coolest_Race_Ever_Created
 
-# SCRUM-Project
+# S: CRUM-Project
 
 <div align="center">
   <img src="https://github.com/TopCollegeTCF/SCRUM-Project/blob/main/.github/banner-1.svg" alt="Цифровая Академия — База данных" width="100%"/>
