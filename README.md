@@ -1,4 +1,12 @@
-# S: CRUM-Project
+# SCRUM-Project
+
+<p align="center">
+  <img src="https://komarev.com/ghpvc/?username=SCRUM-Project&style=flat-square&color=blueviolet" alt=""/>
+  <br>
+  <img src="https://github.com/TopCollegeTCF/SCRUM-Project/blob/main/docs/images/8c46f0dbdbe4fc6df8fefdd80cba89cc.png" alt=""/>
+</p>
+
+
 
 <div align="center">
 
