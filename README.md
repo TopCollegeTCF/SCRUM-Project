@@ -1,7 +1,18 @@
 # SCRUM-Project
 
+## 🔰 Быстрая навигация
+
+[![Wiki: Старт](https://img.shields.io/badge/Wiki-Старт-0ea5e9?logo=github&logoColor=white)]()
+[![Wiki: Схема сущностей](https://img.shields.io/badge/Wiki-Velocity%20-8b5cf6?logo=github&logoColor=white)]()
+[![Issues](https://img.shields.io/badge/Issues-sprint--1-22c55e?logo=github&logoColor=white)](../../issues?q=label%3Asprint-1)
+[![Projects](https://img.shields.io/badge/Projects-Kanban-f59e0b?logo=github&logoColor=white)](../../projects/1)
+[![Discussions](https://img.shields.io/badge/Discussions-Q%26A-ec4899?logo=github&logoColor=white)](../../discussions)
+
+---
+
 <p align="center">
   <img src="https://komarev.com/ghpvc/?username=SCRUM-Project&style=flat-square&color=blueviolet" alt=""/>
+  <br>
   <br>
   <img src="https://github.com/TopCollegeTCF/SCRUM-Project/blob/main/docs/images/8c46f0dbdbe4fc6df8fefdd80cba89cc.png" alt=""/>
 </p>
@@ -89,10 +100,3 @@
 
 ---
 
-## 🔰 Быстрая навигация
-
-[![Wiki: Старт](https://img.shields.io/badge/Wiki-Старт-0ea5e9?logo=github&logoColor=white)](https://github.com/TopCollegeTCF/DB_Application/wiki/Старт.md)
-[![Wiki: Схема сущностей](https://img.shields.io/badge/Wiki-Схема%20сущностей-8b5cf6?logo=github&logoColor=white)](https://github.com/TopCollegeTCF/DB_Application/wiki/Схема-сущностей)
-[![Issues](https://img.shields.io/badge/Issues-sprint--1-22c55e?logo=github&logoColor=white)](../../issues?q=label%3Asprint-1)
-[![Projects](https://img.shields.io/badge/Projects-Kanban-f59e0b?logo=github&logoColor=white)](../../projects/1)
-[![Discussions](https://img.shields.io/badge/Discussions-Q%26A-ec4899?logo=github&logoColor=white)](../../discussions)
