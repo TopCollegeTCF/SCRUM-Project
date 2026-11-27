@@ -2,8 +2,8 @@
 
 ## 🔰 Быстрая навигация
 
-[![Wiki: Старт](https://img.shields.io/badge/Wiki-Старт-0ea5e9?logo=github&logoColor=white)]()
-[![Wiki: Схема сущностей](https://img.shields.io/badge/Wiki-Velocity%20-8b5cf6?logo=github&logoColor=white)]()
+[![Wiki: Старт](https://img.shields.io/badge/Wiki-Старт-0ea5e9?logo=github&logoColor=white)](https://github.com/TopCollegeTCF/SCRUM-Project/wiki/Старт)
+[![Wiki: Velosity](https://img.shields.io/badge/Wiki-Velocity%20-8b5cf6?logo=github&logoColor=white)](https://github.com/TopCollegeTCF/SCRUM-Project/wiki/velosity)
 [![Issues](https://img.shields.io/badge/Issues-sprint--1-22c55e?logo=github&logoColor=white)](../../issues?q=label%3Asprint-1)
 [![Projects](https://img.shields.io/badge/Projects-Kanban-f59e0b?logo=github&logoColor=white)](../../projects/1)
 [![Discussions](https://img.shields.io/badge/Discussions-Q%26A-ec4899?logo=github&logoColor=white)](../../discussions)
